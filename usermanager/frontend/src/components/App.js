@@ -1,19 +1,58 @@
 import React, { Fragment } from "react";
 import ReactDOM from "react-dom";
-import UserComponent from "./UserComponent/UserComponent"
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+
+// Components
+import UsersList from "../components/UsersList/usersList";
 
 class App extends React.Component {
-    render() {
-        return (
-            <Fragment>
-                <UserComponent
+  apiURL = "http://localhost:8000/api/users/";
 
-                />
-            </Fragment>
-        );
-    }
+  state = {
+    UsersList: [],
+  };
+
+  componentDidMount() {
+    this.updateService();
+  }
+
+  updateService() {
+    fetch(this.apiURL)
+      .then((request) => {
+        return request.json();
+      })
+      .then((data) => {
+        this.setState({
+          UsersList: data,
+        });
+      })
+      .catch((err) => console.log(err.message));
+  }
+
+  onDeleteItem = (id) => {
+    // console.log("onDeleteItem ", id);
+    // console.log(this.apiURL + id);
+    fetch(this.apiURL + id, {
+      method: "DELETE",
+    })
+      .then((response) => {
+        this.updateService();
+        console.log(response);
+      })
+      .catch((err) => console.log(err.message));
+  };
+
+  render() {
+    // console.log("State => ", this.state.UsersList);
+    return (
+      <Fragment>
+        <UsersList
+          UsersList={this.state.UsersList}
+          onDeleteItem={this.onDeleteItem}
+        />
+      </Fragment>
+    );
+  }
 }
-
-
 
 ReactDOM.render(<App />, document.getElementById("root"));
