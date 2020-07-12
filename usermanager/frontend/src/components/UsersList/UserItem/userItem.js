@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 class UserItem extends React.Component {
   state = {
@@ -23,6 +24,14 @@ class UserItem extends React.Component {
             <button className="delete-btn" onClick={this.props.onDeleteItem}>
               <i className="fas fa-trash-alt" title="delete row"></i>
             </button>
+          </td>
+          <td className="delete">
+            <Link
+              to="/EditUser"
+              className="fa fa-edit text-success float-right pulse delete-btn"
+              title="Edit"
+              onClick={this.props.onEditUser}
+            ></Link>
           </td>
         </tr>
       </tbody>
