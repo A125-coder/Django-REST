@@ -3,6 +3,8 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { getUsers, deleteUser } from "../../actions/users";
 
+import AddUserForm from "./AddUserForm";
+
 class User extends React.Component {
   static propTypes = {
     users: PropTypes.array.isRequired,
@@ -13,7 +15,7 @@ class User extends React.Component {
   }
 
   render() {
-    const { users } = this.props;
+    const { users, deleteUser } = this.props;
     return (
       <Fragment>
         <div className="outer-container">
@@ -26,7 +28,7 @@ class User extends React.Component {
                 <th>email</th>
                 <th>message</th>
                 <th>delete</th>
-                <th></th>
+                <th>edit</th>
               </tr>
             </thead>
             <tbody>
@@ -39,9 +41,17 @@ class User extends React.Component {
                   <td className="delete">
                     <button
                       className="delete-btn"
-                      onClick={this.props.deleteUser.bind(this, user.id)}
+                      onClick={deleteUser.bind(this, user.id)}
                     >
                       <i className="fas fa-trash-alt" title="delete row"></i>
+                    </button>
+                  </td>
+                  <td className="delete">
+                    <button
+                      className="delete-btn"
+                      // onClick={this.props.deleteUser.bind(this, user.id)}
+                    >
+                      <i className="fas fa-edit" title="delete row"></i>
                     </button>
                   </td>
                 </tr>
@@ -49,6 +59,7 @@ class User extends React.Component {
             </tbody>
           </table>
         </div>
+        <AddUserForm />
       </Fragment>
     );
   }

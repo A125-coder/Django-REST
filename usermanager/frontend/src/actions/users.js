@@ -2,6 +2,7 @@ import axios from "axios";
 
 import { GET_USERS } from "./action";
 import { DELETE_USER } from "./action";
+import { ADD_USER } from "./action";
 
 export const getUsers = () => (dispatch) => {
   axios
@@ -24,6 +25,18 @@ export const deleteUser = (id) => (dispatch) => {
       dispatch({
         type: DELETE_USER,
         payload: id,
+      });
+    })
+    .catch((err) => dispatch(returnErrors(err.response.data.status)));
+};
+
+export const addUser = (user) => (dispatch) => {
+  axios
+    .post("/api/users/", user)
+    .then((res) => {
+      dispatch({
+        type: ADD_USER,
+        payload: res.data,
       });
     })
     .catch((err) => dispatch(returnErrors(err.response.data.status)));
