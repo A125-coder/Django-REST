@@ -27,8 +27,7 @@ class User extends React.Component {
                 <th>name</th>
                 <th>email</th>
                 <th>message</th>
-                <th>delete</th>
-                <th>edit</th>
+                <th></th>
               </tr>
             </thead>
             <tbody>
@@ -46,14 +45,6 @@ class User extends React.Component {
                       <i className="fas fa-trash-alt" title="delete row"></i>
                     </button>
                   </td>
-                  <td className="delete">
-                    <button
-                      className="delete-btn"
-                      // onClick={this.props.deleteUser.bind(this, user.id)}
-                    >
-                      <i className="fas fa-edit" title="delete row"></i>
-                    </button>
-                  </td>
                 </tr>
               ))}
             </tbody>
@@ -65,6 +56,7 @@ class User extends React.Component {
   }
 }
 const mapStateToProps = (state) => {
+  // console.log("Main state: ", state);
   return {
     users: state.users.users,
   };

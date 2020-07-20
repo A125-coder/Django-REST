@@ -15,7 +15,7 @@ class AddUserForm extends React.Component {
     this.setState({ [event.target.name]: event.target.value });
   onSubmit = () => {
     event.preventDefault();
-    console.log("PROPS =>", this.props);
+    // console.log("PROPS =>", this.props);
     const { name, email, message } = this.state;
     const user = { name, email, message };
     this.props.addUser(user);
